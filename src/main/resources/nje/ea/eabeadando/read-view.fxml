@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nje.ea.eabeadando.controllers.ReadController">
+    <TableView fx:id="recordTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="jelentkezoIdColumn" text="Jelentkező ID" />
+            <TableColumn fx:id="jelentkezoNevColumn" text="Jelentkező Név" />
+            <TableColumn fx:id="jelentkezoNemColumn" text="Nem" />
+            <TableColumn fx:id="kepzesNevColumn" text="Képzés Név" />
+            <TableColumn fx:id="sorrendColumn" text="Sorrend" />
+            <TableColumn fx:id="szerzettPontColumn" text="Szerzett Pont" />
+        </columns>
+    </TableView>
+</VBox>
