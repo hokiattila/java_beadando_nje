@@ -460,6 +460,35 @@ public class RecordDAO {
         }
     }
 
+    public boolean deleteJelentkezo(int jelentkezoId) {
+        // Először töröljük a jelentkezes táblából a kapcsolódó rekordokat
+        String deleteJelentkezesQuery = "DELETE FROM jelentkezes WHERE jelentkezoid = ?";
+
+        // Majd töröljük a jelentkezo táblából a megfelelő rekordot
+        String deleteJelentkezoQuery = "DELETE FROM jelentkezo WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmtJelentkezes = conn.prepareStatement(deleteJelentkezesQuery);
+             PreparedStatement pstmtJelentkezo = conn.prepareStatement(deleteJelentkezoQuery)) {
+
+            // Töröljük a jelentkezes táblából a kapcsolódó rekordokat
+            pstmtJelentkezes.setInt(1, jelentkezoId);
+            int rowsDeletedJelentkezes = pstmtJelentkezes.executeUpdate();
+
+            // Töröljük a jelentkezo táblából a kiválasztott rekordot
+            pstmtJelentkezo.setInt(1, jelentkezoId);
+            int rowsDeletedJelentkezo = pstmtJelentkezo.executeUpdate();
+
+            // Ha mindkét törlés sikeres, akkor true-t adunk vissza
+            return rowsDeletedJelentkezes > 0 && rowsDeletedJelentkezo > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Ha hiba történik, false-t adunk vissza
+        }
+    }
+
+
     // Módosítja a képzést
     public boolean updateKepzes(int id, String nev, int felveheto, int minimum) {
         String query = "UPDATE kepzes SET nev = ?, felveheto = ?, minimum = ? WHERE id = ?";
@@ -479,6 +508,35 @@ public class RecordDAO {
         }
     }
 
+    public boolean deleteKepzes(int kepzesId) {
+        // Először töröljük a jelentkezes táblából a kapcsolódó rekordokat
+        String deleteJelentkezesQuery = "DELETE FROM jelentkezes WHERE kepzesid = ?";
+
+        // Majd töröljük a kepzes táblából a megfelelő rekordot
+        String deleteKepzesQuery = "DELETE FROM kepzes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmtJelentkezes = conn.prepareStatement(deleteJelentkezesQuery);
+             PreparedStatement pstmtKepzes = conn.prepareStatement(deleteKepzesQuery)) {
+
+            // Töröljük a jelentkezes táblából a kapcsolódó rekordokat
+            pstmtJelentkezes.setInt(1, kepzesId);
+            int rowsDeletedJelentkezes = pstmtJelentkezes.executeUpdate();
+
+            // Töröljük a kepzes táblából a kiválasztott rekordot
+            pstmtKepzes.setInt(1, kepzesId);
+            int rowsDeletedKepzes = pstmtKepzes.executeUpdate();
+
+            // Ha mindkét törlés sikeres, akkor true-t adunk vissza
+            return rowsDeletedJelentkezes > 0 && rowsDeletedKepzes > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Ha hiba történik, false-t adunk vissza
+        }
+    }
+
+
     // Módosítja a jelentkezést
     public boolean updateJelentkezes(int jelentkezoId, int kepzesId, int sorrend, int szerzettPont) {
         String query = "UPDATE jelentkezes SET sorrend = ?, szerzett = ? WHERE jelentkezoid = ? AND kepzesid = ?";
@@ -495,6 +553,25 @@ public class RecordDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    public boolean deleteJelentkezes(int jelentkezoId, int kepzesId) {
+        // Törlés lekérdezés a jelentkezes táblából
+        String deleteQuery = "DELETE FROM jelentkezes WHERE jelentkezoid = ? AND kepzesid = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(deleteQuery)) {
+
+            // Paraméterek beállítása a lekérdezéshez
+            pstmt.setInt(1, jelentkezoId);
+            pstmt.setInt(2, kepzesId);
+
+            // Végrehajtás és ellenőrzés, hogy történt-e törlés
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Ha a törlés sikeres, akkor true-t ad vissza
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Ha hiba történik, false-t ad vissza
         }
     }
 
