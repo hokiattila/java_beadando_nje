@@ -1,6 +1,8 @@
 package nje.ea.eabeadando.dao;
 
 import nje.ea.eabeadando.models.Record;
+import nje.ea.eabeadando.models.jelentkezoRecord;
+import nje.ea.eabeadando.models.kepzesRecord;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -44,6 +46,55 @@ public class RecordDAO {
         }
 
         return records;
+    }
+
+    public List<kepzesRecord> getAllKepzesRecords() {
+        List<kepzesRecord> kepzesRecord = new ArrayList<>();
+
+        String query = "SELECT * FROM kepzes ORDER BY id ASC";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nev = rs.getString("nev");
+                String felveheto = rs.getString("felveheto");
+                String minimum = rs.getString("minimum");
+
+
+                kepzesRecord.add(new kepzesRecord(id, nev, felveheto, minimum));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return kepzesRecord;
+    }
+
+    public List<jelentkezoRecord> getAllJelentkezoRecords() {
+        List<jelentkezoRecord> jelentkezoRecord = new ArrayList<>();
+
+        String query = "SELECT * FROM jelentkezo ORDER BY id ASC";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nev = rs.getString("nev");
+                String nem = rs.getString("nem");
+                System.out.println(nev + " " + nem + " " + id);
+
+                jelentkezoRecord.add(new jelentkezoRecord(id, nev, nem));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return jelentkezoRecord;
     }
 
     // Lekérdezi az egyedi képzési neveket az adatbázisból
