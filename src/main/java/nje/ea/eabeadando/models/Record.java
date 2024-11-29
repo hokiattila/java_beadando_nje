@@ -1,44 +1,72 @@
 package nje.ea.eabeadando.models;
 
+import javafx.beans.property.*;
+
 public class Record {
 
-    private final int jelentkezoId;
-    private final String jelentkezoNev;
-    private final String jelentkezoNem;
-    private final String kepzesNev;
-    private final int sorrend;
-    private final int szerzett;
+    private final IntegerProperty jelentkezoId;
+    private final StringProperty jelentkezoNev;
+    private final StringProperty jelentkezoNem;
+    private final StringProperty kepzesNev;
+    private final IntegerProperty sorrend;
+    private final IntegerProperty szerzettPont;
 
-    public Record(int jelentkezoId, String jelentkezoNev, String jelentkezoNem, String kepzesNev, int sorrend, int szerzett) {
-        this.jelentkezoId = jelentkezoId;
-        this.jelentkezoNev = jelentkezoNev;
-        this.jelentkezoNem = jelentkezoNem;
-        this.kepzesNev = kepzesNev;
-        this.sorrend = sorrend;
-        this.szerzett = szerzett;
+    public Record(int jelentkezoId, String jelentkezoNev, String jelentkezoNem, String kepzesNev, int sorrend, int szerzettPont) {
+        this.jelentkezoId = new SimpleIntegerProperty(jelentkezoId);
+        this.jelentkezoNev = new SimpleStringProperty(jelentkezoNev);
+        this.jelentkezoNem = new SimpleStringProperty(jelentkezoNem);
+        this.kepzesNev = new SimpleStringProperty(kepzesNev);
+        this.sorrend = new SimpleIntegerProperty(sorrend);
+        this.szerzettPont = new SimpleIntegerProperty(szerzettPont);
     }
 
-    public int getJelentkezoId() {
+    // Getterek a Property objektumokhoz
+    public IntegerProperty jelentkezoIdProperty() {
         return jelentkezoId;
     }
 
-    public String getJelentkezoNev() {
+    public StringProperty jelentkezoNevProperty() {
         return jelentkezoNev;
     }
 
-    public String getJelentkezoNem() {
+    public StringProperty jelentkezoNemProperty() {
         return jelentkezoNem;
     }
 
-    public String getKepzesNev() {
+    public StringProperty kepzesNevProperty() {
         return kepzesNev;
     }
 
-    public int getSorrend() {
+    public IntegerProperty sorrendProperty() {
         return sorrend;
     }
 
-    public int getSzerzett() {
-        return szerzett;
+    public IntegerProperty szerzettPontProperty() {
+        return szerzettPont;
+    }
+
+    // Egyszerű getterek az értékekhez
+    public int getJelentkezoId() {
+        return jelentkezoId.get();
+    }
+
+    public String getJelentkezoNev() {
+        return jelentkezoNev.get();
+    }
+
+    public String getJelentkezoNem() {
+        return jelentkezoNem.get();
+    }
+
+    public String getKepzesNev() {
+        return kepzesNev.get();
+    }
+
+    public int getSorrend() {
+        return sorrend.get();
+    }
+
+    public int getSzerzettPont() {
+        return szerzettPont.get();
     }
 }
