@@ -64,6 +64,10 @@ public class IrController {
         String name = nameField.getText();
         String gender = genderComboBox.getValue();
 
+        String newGender = gender;
+        if (gender.toLowerCase().equals("fiú")) newGender = "f";
+        if (gender.toLowerCase().equals("lány")) newGender = "l";
+
         // Ellenőrizzük, hogy minden adatot megadtak-e
         if (name == null || name.isEmpty() || gender == null || gender.isEmpty()) {
             System.out.println("Kérlek töltsd ki az összes mezőt!");
@@ -71,8 +75,8 @@ public class IrController {
         }
 
         // Hozzáadjuk az adatbázishoz (itt a DAO-n keresztül)
-        recordDAO.addJelentkezo(name, gender);
-
+        recordDAO.addJelentkezo(name, newGender);
+        System.out.println("Jelentkező hozzáadva. Név: " + name + " Nem: " + newGender);
         // Mezők tisztítása
         nameField.clear();
         genderComboBox.getSelectionModel().clearSelection();
@@ -101,7 +105,7 @@ public class IrController {
 
             // Hozzáadjuk az adatbázishoz
             recordDAO.addKepzes(courseName, capacity, minScore);
-
+            System.out.println("Képzés hozzáadva: Név: " + courseName + " felvehető: " + capacity + "Min Pontszám:" + minScore);
             // Mezők tisztítása
             courseNameField.clear();
             courseCapacityField.clear();
@@ -119,8 +123,8 @@ public class IrController {
     @FXML
     private void handleAddJelentkezes() {
         // Jelentkezés adatainak lekérése
-        String applicantName = applicantComboBox.getValue();
-        String courseName = courseComboBox.getValue();
+        String applicantName = recordDAO.getApplicantNameById(Integer.parseInt(applicantComboBox.getValue()));
+        String courseName = recordDAO.getKepzesNameById(Integer.parseInt(courseComboBox.getValue()));
         String rankText = rankField.getText();
         String scoreText = scoreField.getText();
 
@@ -140,7 +144,7 @@ public class IrController {
 
             // Hozzáadjuk a jelentkezést az adatbázishoz
             recordDAO.addJelentkezes(applicantId, courseId, rank, score);
-
+            System.out.println("Jelentkezés hozzáadva: ID: " + applicantId + " Kurzus: " + courseId + " Rangsor: " + rank + " Pontszám: " + score);
             // Mezők tisztítása
             applicantComboBox.getSelectionModel().clearSelection();
             courseComboBox.getSelectionModel().clearSelection();

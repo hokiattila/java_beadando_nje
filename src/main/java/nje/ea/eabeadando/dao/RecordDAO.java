@@ -109,25 +109,7 @@ public class RecordDAO {
             return false;
         }
     }
-    public int getKepzesIdByName(String kepzesNev) {
-        String query = "SELECT id FROM kepzes WHERE nev = ?";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, kepzesNev);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return -1; // Ha nem találunk ilyen képzést, akkor -1-et adunk vissza
-    }
 
     // Lekérdezi az összes jelentkező nevét
     public List<String> getAllApplicants() {
@@ -196,6 +178,26 @@ public class RecordDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, applicantId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                name = rs.getString("nev");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+
+    public String getKepzesNameById(int kepzesid) {
+        String name = "";
+        String query = "SELECT nev FROM kepzes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, kepzesid);  // Az ID-t állítjuk be
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -392,16 +394,14 @@ public class RecordDAO {
     public void addJelentkezo(String name, String gender) {
         String query = "INSERT INTO jelentkezo (nev, nem) VALUES (?, ?)";
 
-        String formattedGender = "f";
-        if (gender.toLowerCase() == "fiú") formattedGender = "f";
-        else formattedGender = "l";
+
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, name);
-            stmt.setString(2, formattedGender);
+            stmt.setString(2, gender);
             stmt.executeUpdate();
-            System.out.println("Sikeresen hozzaadva: " + name + formattedGender);
+            System.out.println("Sikeresen hozzaadva: " + name + gender);
         } catch (Exception e) {
             e.printStackTrace();
         }
