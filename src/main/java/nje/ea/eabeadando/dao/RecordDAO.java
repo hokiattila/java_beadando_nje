@@ -13,6 +13,7 @@ public class RecordDAO {
 
     private static final String DB_URL = "jdbc:sqlite:C:/adatok/adatok.db";
 
+    // Lekérdezi az összes rekordot
     public List<Record> getAllRecords() {
         List<Record> records = new ArrayList<>();
 
@@ -46,5 +47,24 @@ public class RecordDAO {
         }
 
         return records;
+    }
+
+    // Lekérdezi az egyedi képzési neveket az adatbázisból
+    public List<String> getUniqueKepzesNev() {
+        List<String> kepzesNevList = new ArrayList<>();
+        String query = "SELECT DISTINCT kepzes.nev AS kepzesNev FROM kepzes ORDER BY kepzesNev ASC"; // Lekérdezés az egyedi képzési nevekre
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                kepzesNevList.add(rs.getString("kepzesNev"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return kepzesNevList;
     }
 }
