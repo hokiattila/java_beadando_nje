@@ -19,6 +19,15 @@ public class Record {
         this.sorrend = new SimpleIntegerProperty(sorrend);
         this.szerzettPont = new SimpleIntegerProperty(szerzettPont);
     }
+    public Record(String jelentkezoNev, String jelentkezoNem, String kepzesNev, int sorrend, int szerzettPont) {
+        this.jelentkezoId = new SimpleIntegerProperty(100);
+        this.jelentkezoNev = new SimpleStringProperty(jelentkezoNev);
+        this.jelentkezoNem = new SimpleStringProperty(jelentkezoNem);
+        this.kepzesNev = new SimpleStringProperty(kepzesNev);
+        this.sorrend = new SimpleIntegerProperty(sorrend);
+        this.szerzettPont = new SimpleIntegerProperty(szerzettPont);
+    }
+
 
     // Getterek a Property objektumokhoz
     public IntegerProperty jelentkezoIdProperty() {
