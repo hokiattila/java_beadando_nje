@@ -132,14 +132,14 @@ public class RecordDAO {
     // Lekérdezi az összes jelentkező nevét
     public List<String> getAllApplicants() {
         List<String> applicants = new ArrayList<>();
-        String query = "SELECT nev FROM jelentkezo ORDER BY nev ASC"; // Lekérdezés a jelentkezők neveire
+        String query = "SELECT id FROM jelentkezo ORDER BY id ASC"; // Lekérdezés a jelentkezők neveire
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                applicants.add(rs.getString("nev"));
+                applicants.add(rs.getString("id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,23 +148,203 @@ public class RecordDAO {
         return applicants;
     }
 
-    // Lekérdezi az összes képzés nevét
-    public List<String> getAllCourses() {
-        List<String> courses = new ArrayList<>();
-        String query = "SELECT nev FROM kepzes ORDER BY nev ASC"; // Lekérdezés a képzések neveire
+    public List<String[]> getAllApplications() {
+        List<String[]> applications = new ArrayList<>();
+        String query = "SELECT jelentkezoid, kepzesid FROM jelentkezes ORDER BY jelentkezoid ASC, kepzesid ASC";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                courses.add(rs.getString("nev"));
+                String jelentkezoid = rs.getString("jelentkezoid");
+                String kepzesid = rs.getString("kepzesid");
+                applications.add(new String[]{jelentkezoid, kepzesid});
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return applications;
+    }
+
+
+    // Lekérdezi az összes képzés nevét
+    public List<String> getAllCourses() {
+        List<String> courses = new ArrayList<>();
+        String query = "SELECT id FROM kepzes ORDER BY id ASC"; // Lekérdezés a képzések neveire
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                courses.add(rs.getString("id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return courses;
+    }
+    // Jelentkező név lekérése az ID alapján
+    public String getApplicantNameById(int applicantId) {
+        String name = "";
+        String query = "SELECT nev FROM jelentkezo WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, applicantId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                name = rs.getString("nev");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+
+    public String getApplicationSorrendById(int jelentkezoid, int kepzesid) {
+        String data = "";
+        String query = "SELECT sorrend FROM jelentkezes WHERE jelentkezoid = ? and kepzesid = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, jelentkezoid);
+            stmt.setInt(2, kepzesid);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                data = rs.getString("sorrend");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+    public String getApplicationSzerzettById(int jelentkezoid, int kepzesid) {
+        String data = "";
+        String query = "SELECT szerzett FROM jelentkezes WHERE jelentkezoid = ? and kepzesid = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, jelentkezoid);
+            stmt.setInt(2, kepzesid);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                data = rs.getString("szerzett");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+    public String getApplicantGenderById(int applicantId) {
+        String name = "";
+        String query = "SELECT nem FROM jelentkezo WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, applicantId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                name = rs.getString("nem");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+    // Képzés név lekérése az ID alapján
+    public String getCourseNameById(int courseId) {
+        String courseName = "";
+        String query = "SELECT nev FROM kepzes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, courseId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                courseName = rs.getString("nev");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return courseName;
+    }
+    public String getCourseMinscoreById(int courseId) {
+        String courseName = "";
+        String query = "SELECT minimum FROM kepzes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, courseId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                courseName = rs.getString("minimum");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return courseName;
+    }
+
+    public String getCourseCapacityById(int courseId) {
+        String courseName = "";
+        String query = "SELECT felveheto FROM kepzes WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, courseId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                courseName = rs.getString("felveheto");  // A nev oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return courseName;
+    }
+    // Jelentkező gender lekérése az ID alapján
+    public String getGenderByApplicantId(int applicantId) {
+        String gender = "";
+        String query = "SELECT gender FROM jelentkezo WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, applicantId);  // Az ID-t állítjuk be
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                gender = rs.getString("gender");  // A gender oszlopot kérjük le
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return gender;
     }
     // Jelentkező ID lekérése a név alapján
     public int getApplicantIdByName(String name) {
@@ -259,4 +439,63 @@ public class RecordDAO {
             e.printStackTrace();
         }
     }
+    // Módosítja a jelentkezőt
+    public boolean updateJelentkezo(int id, String nev, String nem) {
+        String query = "UPDATE jelentkezo SET nev = ?, nem = ? WHERE id = ?";
+
+        String newGender = nem;
+        if (nem.toLowerCase() == "fiú") newGender = "f";
+        if (nem.toLowerCase() == "lány") newGender = "l";
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, nev);
+            pstmt.setString(2, newGender);
+            pstmt.setInt(3, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+    // Módosítja a képzést
+    public boolean updateKepzes(int id, String nev, int felveheto, int minimum) {
+        String query = "UPDATE kepzes SET nev = ?, felveheto = ?, minimum = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, nev);
+            pstmt.setInt(2, felveheto);
+            pstmt.setInt(3, minimum);
+            pstmt.setInt(4, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Módosítja a jelentkezést
+    public boolean updateJelentkezes(int jelentkezoId, int kepzesId, int sorrend, int szerzettPont) {
+        String query = "UPDATE jelentkezes SET sorrend = ?, szerzett = ? WHERE jelentkezoid = ? AND kepzesid = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, sorrend);
+            pstmt.setInt(2, szerzettPont);
+            pstmt.setInt(3, jelentkezoId);
+            pstmt.setInt(4, kepzesId);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+}
