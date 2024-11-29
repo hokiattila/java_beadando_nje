@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.geometry.Pos?> <!-- A középre igazításhoz szükséges -->
+<?import javafx.geometry.Pos?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.Read2Controller">
-    <center>
-        <VBox spacing="10" alignment="CENTER">
-            <!-- Középre igazított, fix szélességű elemek -->
-            <TextField alignment="CENTER" text="Név" maxWidth="300"/>
-            <ComboBox fx:id="kepzesComboBox" promptText="Képzés" maxWidth="300"/>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.Read2Controller">
 
-            <VBox spacing="5" alignment="CENTER"> <!-- A RadioButton-ok csoportosításához -->
-                <RadioButton text="Csak első helyen álló sorrend"/>
-                <RadioButton text="Csak 150 pont felettiek"/>
+    <!-- Keresési Form -->
+    <BorderPane fx:id="searchPane">
+        <center>
+            <VBox spacing="10" alignment="CENTER">
+                <TextField fx:id="textField" alignment="CENTER" text="Név" maxWidth="300"/>
+                <ComboBox fx:id="kepzesComboBox" promptText="Képzés" maxWidth="300"/>
+                <VBox spacing="5" alignment="CENTER">
+                    <!-- Nem szűrési lehetőség -->
+                    <Label text="Nem:"/>
+                    <RadioButton fx:id="radioOption1" text="Fiú"/>
+                    <RadioButton fx:id="radioOption2" text="Lány"/>
+                    <RadioButton fx:id="radioOption3" text="Mindegy"/>
+                </VBox>
+                <Label text="Pontszám:"/>
+                <CheckBox fx:id="checkBox" text="Minimum 150 pont"/>
+                <Button text="Keresés" maxWidth="150" onAction="#handleFilterAction"/>
             </VBox>
-            <CheckBox text="Duplikált elemek nélkül"/>
-            <Button text="Keresés" maxWidth="150"/> <!-- Kisebb gomb szélesség -->
-        </VBox>
-    </center>
-</BorderPane>
+        </center>
+    </BorderPane>
+
+    <!-- Táblázat nézet -->
+    <VBox fx:id="tablePane" spacing="10" alignment="CENTER" visible="false">
+        <TableView fx:id="recordTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="jelentkezoIdColumn" text="Jelentkező ID"/>
+                <TableColumn fx:id="jelentkezoNevColumn" text="Jelentkező Név"/>
+                <TableColumn fx:id="jelentkezoNemColumn" text="Nem"/>
+                <TableColumn fx:id="kepzesNevColumn" text="Képzés Név"/>
+                <TableColumn fx:id="sorrendColumn" text="Sorrend"/>
+                <TableColumn fx:id="szerzettPontColumn" text="Szerzett Pont"/>
+            </columns>
+        </TableView>
+        <Button text="Új keresés" onAction="#handleNewSearchAction"/>
+    </VBox>
+
+</StackPane>

@@ -3,9 +3,19 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nje.ea.eabeadando.controllers.ReadController">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nje.ea.eabeadando.controllers.ReadController">
+    <TabPane fx:id="tabPane" prefWidth="600" prefHeight="400">
+    <!-- Jelentkező Tab -->
+    <Tab text="Jelentkezés">
     <TableView fx:id="recordTable" VBox.vgrow="ALWAYS">
+
         <columns>
             <TableColumn fx:id="jelentkezoIdColumn" text="Jelentkező ID" />
             <TableColumn fx:id="jelentkezoNevColumn" text="Jelentkező Név" />
@@ -14,5 +24,33 @@
             <TableColumn fx:id="sorrendColumn" text="Sorrend" />
             <TableColumn fx:id="szerzettPontColumn" text="Szerzett Pont" />
         </columns>
+
     </TableView>
-</VBox>
+    </Tab>
+        <Tab text="Képzés">
+            <TableView fx:id="kepzesTable" VBox.vgrow="ALWAYS">
+
+                <columns>
+                    <TableColumn fx:id="kepzesId" text="Képzés ID" />
+                    <TableColumn fx:id="kepzesNev" text="Képzés Név" />
+                    <TableColumn fx:id="kepzesFelveheto" text="Képzés limit" />
+                    <TableColumn fx:id="kepzesMinimum" text="Képzés minimum" />
+
+                </columns>
+
+            </TableView>
+        </Tab>
+        <Tab text="Jelentkező">
+            <TableView fx:id="jelentkezoTable" VBox.vgrow="ALWAYS">
+
+                <columns>
+                    <TableColumn fx:id="jelentkezoId" text="Jelentkező ID" />
+                    <TableColumn fx:id="jelentkezoNev" text="Jelentkező Név" />
+                    <TableColumn fx:id="jelentkezoNem" text="Nem" />
+
+                </columns>
+
+            </TableView>
+        </Tab>
+    </TabPane>
+</StackPane>

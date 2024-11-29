@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nje.ea.eabeadando.controllers.ParhuzamosController" spacing="20" style="-fx-padding: 20;" alignment="CENTER">
+    <Label fx:id="label1" text="Label 1: ">
+        <font>
+            <Font name="System Bold" size="24" />
+        </font>
+        <alignment>CENTER</alignment>
+    </Label>
+    <Label fx:id="label2" text="Label 2: ">
+        <font>
+            <Font name="System Bold" size="24" />
+        </font>
+        <alignment>CENTER</alignment>
+    </Label>
+</VBox>

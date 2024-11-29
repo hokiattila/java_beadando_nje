@@ -8,7 +8,7 @@
 
     <!-- Menüsor a tetején -->
     <top>
-        <VBox>
+        <VBox alignment="CENTER">
             <MenuBar fx:id="menuBar">
                 <menus>
                     <Menu text="Adatbázis">

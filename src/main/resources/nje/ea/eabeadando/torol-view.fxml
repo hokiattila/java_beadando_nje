@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<StackPane xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.TorolController">
+    <TabPane fx:id="tabPane" prefWidth="600" prefHeight="400">
+        <!-- Jelentkező Tab -->
+        <Tab text="Jelentkező">
+            <VBox spacing="10" alignment="CENTER">
+                <ComboBox fx:id="jelentkezoComboBox" promptText="Jelentkező" maxWidth="300" onAction="#handleJelentkezoSelection"/>
+                <TextField fx:id="nameField" promptText="Jelentkező neve" maxWidth="300" disable="true"/>
+                <ComboBox fx:id="genderComboBox" promptText="Nem" maxWidth="300" disable="true">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="f"/>
+                            <String fx:value="l"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Button text="Jelentkező törlése" onAction="#handleJelentkezoDelete" maxWidth="150"/>
+            </VBox>
+        </Tab>
+
+        <!-- Képzés Tab -->
+        <Tab text="Képzés">
+            <VBox spacing="10" alignment="CENTER">
+                <ComboBox fx:id="kepzesComboBox" promptText="Képzés" maxWidth="300" onAction="#handleKepzesSelection"/>
+                <TextField fx:id="courseNameField" promptText="Képzés neve" maxWidth="300" disable="true"/>
+                <TextField fx:id="courseCapacityField" promptText="Felvehető létszám" maxWidth="300" disable="true"/>
+                <TextField fx:id="courseMinScoreField" promptText="Minimum pontszám" maxWidth="300" disable="true"/>
+                <Button text="Képzés törlése" onAction="#handleKepzesDelete" maxWidth="150" />
+            </VBox>
+        </Tab>
+
+        <!-- Jelentkezés Tab -->
+        <Tab text="Jelentkezés">
+            <VBox spacing="10" alignment="CENTER">
+                <ComboBox fx:id="jelentkezesComboBox" promptText="Jelentkezés" maxWidth="300" onAction="#handleJelentkezesSelection"/>
+                <!-- <ComboBox fx:id="applicantComboBox" promptText="Jelentkező" maxWidth="300"/>
+                <ComboBox fx:id="courseComboBox" promptText="Képzés" maxWidth="300"/>-->
+                <TextField fx:id="rankField" promptText="Sorrend" maxWidth="300" disable="true"/>
+                <TextField fx:id="scoreField" promptText="Szerzett pont" maxWidth="300" disable="true"/>
+                <Button text="Jelentkezés törlése" onAction="#handleJelentkezesDelete" maxWidth="150"/>
+            </VBox>
+        </Tab>
+    </TabPane>
+</StackPane>
