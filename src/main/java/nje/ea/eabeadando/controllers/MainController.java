@@ -75,8 +75,8 @@ public class MainController {
     @FXML
     private void handleParhuzamos(ActionEvent event) {
         System.out.println("Párhuzamos menüpont kiválasztva.");
+        loadView("/nje/ea/eabeadando/parhuzamos-view.fxml");
     }
-
     @FXML
     private void handleSzamlainfo(ActionEvent event) {
         System.out.println("Számlainformációk menüpont kiválasztva.");
