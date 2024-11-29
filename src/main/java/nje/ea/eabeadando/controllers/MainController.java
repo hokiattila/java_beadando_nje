@@ -8,10 +8,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import nje.ea.eabeadando.MainApp;
+import javafx.scene.control.Label;
+
 
 import java.io.IOException;
 
 public class MainController {
+
+    @FXML
+    private Label startupLabel;
 
     @FXML
     private MenuBar menuBar;
@@ -22,6 +27,8 @@ public class MainController {
     @FXML
     public void initialize() {
         System.out.println("MainController initialized");
+            startupLabel.setVisible(true);
+
     }
 
 
@@ -32,7 +39,7 @@ public class MainController {
 
     @FXML
     private void handleOlvas2() {
-        loadView("/nje/ea/eabeadando/read-view-2.fxml");
+        loadView("/nje/ea/eabeadando/read2-view.fxml");
     }
 
     @FXML
@@ -103,16 +110,13 @@ public class MainController {
     private void loadView(String fxmlPath) {
         try {
             System.out.println("Attempting to load view: " + fxmlPath);
-            Node node = FXMLLoader.load(MainApp.class.getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
+            Node node = loader.load();
+            System.out.println("FXML loaded successfully for: " + fxmlPath);
 
-            System.out.println("ContentPane children count before clear: " + contentPane.getChildren().size());
             contentPane.getChildren().clear();
-            System.out.println("ContentPane children count after clear: " + contentPane.getChildren().size());
             contentPane.getChildren().add(node);
-            System.out.println("ContentPane children count after add: " + contentPane.getChildren().size());
 
-
-            // Méretezési szabályok az AnchorPane-n
             AnchorPane.setTopAnchor(node, 0.0);
             AnchorPane.setBottomAnchor(node, 0.0);
             AnchorPane.setLeftAnchor(node, 0.0);
@@ -121,10 +125,11 @@ public class MainController {
         } catch (IOException e) {
             System.err.println("Error loading view: " + fxmlPath);
             e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error: " + fxmlPath);
+            e.printStackTrace();
         }
     }
-
-
 
     private void showError(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

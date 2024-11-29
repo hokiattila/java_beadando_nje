@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Pos?> <!-- A középre igazításhoz szükséges -->
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.Read2Controller">
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <!-- Középre igazított, fix szélességű elemek -->
+            <TextField alignment="CENTER" text="Név" maxWidth="300"/>
+            <ComboBox fx:id="kepzesComboBox" promptText="Képzés" maxWidth="300"/>
+
+            <VBox spacing="5" alignment="CENTER"> <!-- A RadioButton-ok csoportosításához -->
+                <RadioButton text="Csak első helyen álló sorrend"/>
+                <RadioButton text="Csak 150 pont felettiek"/>
+            </VBox>
+            <CheckBox text="Duplikált elemek nélkül"/>
+            <Button text="Keresés" maxWidth="150"/> <!-- Kisebb gomb szélesség -->
+        </VBox>
+    </center>
+</BorderPane>

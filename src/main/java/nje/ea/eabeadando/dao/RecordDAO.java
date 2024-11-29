@@ -24,7 +24,8 @@ public class RecordDAO {
                 "jelentkezes.szerzett AS szerzettPont " +
                 "FROM jelentkezo " +
                 "INNER JOIN jelentkezes ON jelentkezo.id = jelentkezes.jelentkezoid " +
-                "INNER JOIN kepzes ON jelentkezes.kepzesid = kepzes.id";
+                "INNER JOIN kepzes ON jelentkezes.kepzesid = kepzes.id" +
+                " ORDER BY jelentkezo.id ASC";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement();

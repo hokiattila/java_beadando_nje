@@ -8,38 +8,43 @@
 
     <!-- Menüsor a tetején -->
     <top>
-        <MenuBar fx:id="menuBar">
-            <menus>
-                <Menu text="Adatbázis">
-                    <MenuItem text="Olvas" onAction="#handleOlvas"/>
-                    <MenuItem text="Olvas2" onAction="#handleOlvas2"/>
-                    <MenuItem text="Ír" onAction="#handleIr"/>
-                    <MenuItem text="Módosít" onAction="#handleModosit"/>
-                    <MenuItem text="Töröl" onAction="#handleTorol"/>
-                </Menu>
-                <Menu text="SOAP Kliens">
-                    <MenuItem text="Letöltés" onAction="#handleLetoltes"/>
-                    <MenuItem text="Letöltés2" onAction="#handleLetoltes2"/>
-                    <MenuItem text="Grafikon" onAction="#handleGrafikon"/>
-                </Menu>
-                <Menu text="Párhuzamos">
-                    <MenuItem text="Futtatás" onAction="#handleParhuzamos"/>
-                </Menu>
-                <Menu text="Forex">
-                    <MenuItem text="Számlainformációk" onAction="#handleSzamlainfo"/>
-                    <MenuItem text="Aktuális árak" onAction="#handleAktualisArak"/>
-                    <MenuItem text="Historikus árak" onAction="#handleHistorikusArak"/>
-                    <MenuItem text="Pozíció nyitás" onAction="#handlePozicioNyitas"/>
-                    <MenuItem text="Pozíció zárás" onAction="#handlePozicioZaras"/>
-                    <MenuItem text="Nyitott pozíciók" onAction="#handleNyitottPoziciok"/>
-                </Menu>
-            </menus>
-        </MenuBar>
+        <VBox>
+            <MenuBar fx:id="menuBar">
+                <menus>
+                    <Menu text="Adatbázis">
+                        <MenuItem text="Olvas" onAction="#handleOlvas"/>
+                        <MenuItem text="Olvas2" onAction="#handleOlvas2"/>
+                        <MenuItem text="Ír" onAction="#handleIr"/>
+                        <MenuItem text="Módosít" onAction="#handleModosit"/>
+                        <MenuItem text="Töröl" onAction="#handleTorol"/>
+                    </Menu>
+                    <Menu text="SOAP Kliens">
+                        <MenuItem text="Letöltés" onAction="#handleLetoltes"/>
+                        <MenuItem text="Letöltés2" onAction="#handleLetoltes2"/>
+                        <MenuItem text="Grafikon" onAction="#handleGrafikon"/>
+                    </Menu>
+                    <Menu text="Párhuzamos">
+                        <MenuItem text="Futtatás" onAction="#handleParhuzamos"/>
+                    </Menu>
+                    <Menu text="Forex">
+                        <MenuItem text="Számlainformációk" onAction="#handleSzamlainfo"/>
+                        <MenuItem text="Aktuális árak" onAction="#handleAktualisArak"/>
+                        <MenuItem text="Historikus árak" onAction="#handleHistorikusArak"/>
+                        <MenuItem text="Pozíció nyitás" onAction="#handlePozicioNyitas"/>
+                        <MenuItem text="Pozíció zárás" onAction="#handlePozicioZaras"/>
+                        <MenuItem text="Nyitott pozíciók" onAction="#handleNyitottPoziciok"/>
+                    </Menu>
+                </menus>
+            </MenuBar>
+
+            <!-- Java Alkalmazások Felirat -->
+            <Label fx:id="startupLabel" text="Java Alkalmazások Beadandó" alignment="CENTER" visible="false"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
     </top>
 
     <!-- Tartalom helye -->
     <center>
         <AnchorPane fx:id="contentPane"/>
     </center>
-
 </BorderPane>

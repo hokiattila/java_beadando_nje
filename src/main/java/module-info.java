@@ -15,7 +15,7 @@ module nje.ea.eabeadando {
     opens nje.ea.eabeadando to javafx.fxml;
     exports nje.ea.eabeadando;
 
-    exports nje.ea.eabeadando.controllers to javafx.fxml;
     opens nje.ea.eabeadando.controllers to javafx.fxml;
     opens nje.ea.eabeadando.models to javafx.base;
+    exports nje.ea.eabeadando.controllers;
 }

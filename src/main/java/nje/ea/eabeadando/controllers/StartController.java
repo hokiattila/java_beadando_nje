@@ -10,6 +10,6 @@ public class StartController {
 
     @FXML
     public void initialize() {
-        njeIcon.setImage(new Image(getClass().getResourceAsStream("/images/njeicon.png")));
+         //njeIcon.setImage(new Image(getClass().getResourceAsStream("/images/njeicon.png")));
     }
 }
