@@ -46,7 +46,7 @@ public class ReadController {
         jelentkezoNemColumn.setCellValueFactory(new PropertyValueFactory<>("jelentkezoNem"));
         kepzesNevColumn.setCellValueFactory(new PropertyValueFactory<>("kepzesNev"));
         sorrendColumn.setCellValueFactory(new PropertyValueFactory<>("sorrend"));
-        szerzettPontColumn.setCellValueFactory(new PropertyValueFactory<>("szerzett"));
+        szerzettPontColumn.setCellValueFactory(new PropertyValueFactory<>("szerzettPont"));
 
         refreshTable();
     }
