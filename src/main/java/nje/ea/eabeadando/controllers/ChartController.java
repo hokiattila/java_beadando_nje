@@ -1,11 +1,17 @@
 package nje.ea.eabeadando.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
 import nje.ea.eabeadando.MNB;
+import nje.ea.eabeadando.MainApp;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -90,6 +96,25 @@ public class ChartController {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Hiba az MNB API meghívása közben!");
+        }
+    }
+
+    @FXML
+    public void onMenuRedirectClicked(ActionEvent event) {
+        try {
+            // FXML betöltése
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/nje/ea/eabeadando/menu-bar.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 900, 600); // Beállíthatod a szélességet és magasságot is
+
+            // Aktuális Stage megszerzése az ActionEvent segítségével
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("JavaFX CRUD Alkalmazás"); // Ablak címének beállítása
+            stage.setScene(scene);
+            stage.setResizable(false); // Nem méretezhető ablak
+            stage.show(); // Új nézet megjelenítése
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Hiba történt a menu-bar.fxml betöltése során!");
         }
     }
 }

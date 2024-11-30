@@ -2,6 +2,7 @@
 
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.ChartController">
     <center>
@@ -15,4 +16,9 @@
             </yAxis>
         </LineChart>
     </center>
+    <bottom>
+        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
+            <Button text="Vissza a menübe" onAction="#onMenuRedirectClicked" />
+        </HBox>
+    </bottom>
 </BorderPane>

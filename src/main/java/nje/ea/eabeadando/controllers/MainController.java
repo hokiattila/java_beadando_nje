@@ -65,7 +65,7 @@ public class MainController {
 
     @FXML
     private void handleGrafikon(ActionEvent event) {
-        loadView("/nje/ea/eabeadando/chart-view.fxml");
+        loadView("/nje/ea/eabeadando/nbachartform-view.fxml");
     }
 
     @FXML
@@ -103,7 +103,7 @@ public class MainController {
         System.out.println("Nyitott pozíciók menüpont kiválasztva.");
     }
 
-    private void loadView(String fxmlPath) {
+    public void loadView(String fxmlPath) {
         try {
             System.out.println("Attempting to load view: " + fxmlPath);
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
