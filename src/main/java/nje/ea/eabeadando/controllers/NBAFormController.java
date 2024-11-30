@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import nje.ea.eabeadando.MNB;
 
 import java.awt.*;
 import java.io.File;
@@ -47,32 +48,11 @@ public class NBAFormController {
                 throw new IllegalArgumentException("A kezdődátum nem lehet későbbi, mint a végdátum!");
             }
 
-            // 2. SOAP-MNB.jar futtatása
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String startDateStr = startDate.format(formatter);
             String endDateStr = endDate.format(formatter);
 
-            String jarPath = "src/main/resources/nje/ea/eabeadando/SOAP-MNB.jar";
-            ProcessBuilder processBuilder = new ProcessBuilder(
-                    "java", "-jar", jarPath, currency, startDateStr, endDateStr);
-
-            // Parancs futtatása
-            Process process = processBuilder.start();
-            int exitCode = process.waitFor(); // Várakozás a folyamat befejezésére
-
-            if (exitCode != 0) {
-                throw new RuntimeException("SOAP-MNB.jar futtatása sikertelen! Hibakód: " + exitCode);
-            }
-
-            // 3. MNB.txt fájl megnyitása
-            File file = new File("c:\\adatok\\MNB.txt");
-            if (!file.exists()) {
-                throw new IOException("Nem található a letöltött MNB.txt fájl: " + file.getAbsolutePath());
-            }
-
-            // Fájl és mappa megnyitása
-            Desktop.getDesktop().open(file);
-            Desktop.getDesktop().open(new File("c:\\adatok"));
+            MNB.getData(currency, startDateStr, endDateStr);
 
         } catch (IllegalArgumentException e) {
             // Felhasználói hibák kezelése
