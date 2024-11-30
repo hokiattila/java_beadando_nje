@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.NBAFormController"
+      alignment="CENTER" spacing="15" style="-fx-padding: 20;">
+
+    <!-- Cím -->
+    <Label text="MNB Árfolyam Letöltő" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <!-- Valuta kiválasztása -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Valuta típusa:" style="-fx-font-size: 14px;" />
+        <ComboBox fx:id="currencyComboBox" promptText="Válassz devizát" />
+    </HBox>
+
+    <!-- Kezdődátum -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Kezdődátum:" style="-fx-font-size: 14px;" />
+        <DatePicker fx:id="startDatePicker" />
+    </HBox>
+
+    <!-- Végdátum -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Végdátum:" style="-fx-font-size: 14px;" />
+        <DatePicker fx:id="endDatePicker" />
+    </HBox>
+
+    <!-- Letöltés gomb -->
+    <Button text="Letöltés" onAction="#onDownloadClicked" style="-fx-font-size: 16px; -fx-padding: 10 20;" />
+
+</VBox>
