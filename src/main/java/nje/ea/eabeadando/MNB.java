@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MNB {
-    public static void getData(String currency, String startDate, String endDate) {
+    public static void getData(String currency, String startDate, String endDate, boolean openResult) {
         try {
             String jarPath = "src/main/resources/nje/ea/eabeadando/SOAP-MNB.jar";
             File dataFolder = new File("c:\\adatok");
@@ -36,16 +36,17 @@ public class MNB {
                 throw new IOException("Nem található a letöltött MNB.txt fájl: " + file.getAbsolutePath());
             }
 
-            // 5. c:\adatok mappa megnyitása
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(dataFolder);
-            } else {
-                throw new UnsupportedOperationException("A rendszer nem támogatja a mappanyitást");
+            if(openResult) {
+                    // 5. c:\adatok mappa megnyitása
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().open(dataFolder);
+                    } else {
+                        throw new UnsupportedOperationException("A rendszer nem támogatja a mappanyitást");
+                    }
+
+                    // Alapértelmezett rendszerprogrammal nyitja meg az MNB.txt-t
+                    Desktop.getDesktop().open(file);
             }
-
-            // Alapértelmezett rendszerprogrammal nyitja meg az MNB.txt-t
-            Desktop.getDesktop().open(file);
-
         } catch (Exception e) {
             // Hiba esetén felugró ablak jelenik meg
             Alert alert = new Alert(Alert.AlertType.ERROR);

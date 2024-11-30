@@ -24,7 +24,7 @@ public class NBADownloadController {
                 String threeDaysAgoStr = threeDaysAgo.format(formatter);
 
                 // Kérés indítés
-                MNB.getData("EUR",threeDaysAgoStr, todayStr);
+                MNB.getData("EUR",threeDaysAgoStr, todayStr, true);
 
             } catch (Exception e) {
                 // Hiba esetén felugró ablak jelenik meg

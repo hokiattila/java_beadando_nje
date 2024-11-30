@@ -65,7 +65,7 @@ public class MainController {
 
     @FXML
     private void handleGrafikon(ActionEvent event) {
-        System.out.println("Grafikon menüpont kiválasztva.");
+        loadView("/nje/ea/eabeadando/chart-view.fxml");
     }
 
     @FXML

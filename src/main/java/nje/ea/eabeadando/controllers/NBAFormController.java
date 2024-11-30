@@ -52,7 +52,7 @@ public class NBAFormController {
             String startDateStr = startDate.format(formatter);
             String endDateStr = endDate.format(formatter);
 
-            MNB.getData(currency, startDateStr, endDateStr);
+            MNB.getData(currency, startDateStr, endDateStr, true);
 
         } catch (IllegalArgumentException e) {
             // Felhasználói hibák kezelése
