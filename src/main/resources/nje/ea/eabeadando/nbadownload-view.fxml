@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="nje.ea.eabeadando.controllers.NBADownloadController"
+      alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+    <Label text="Elmúlt 3 napi EUR árfolyam letöltése" style="-fx-font-size: 16px; -fx-text-fill: #333; -fx-font-weight: bold;" />
+    <Button text="Letöltés" onAction="#onDownloadClicked" style="-fx-font-size: 18px; -fx-padding: 10;" />
+</VBox>

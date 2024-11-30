@@ -58,9 +58,7 @@ public class MainController {
     }
 
     @FXML
-    private void handleLetoltes(ActionEvent event) {
-        System.out.println("Letöltés menüpont kiválasztva.");
-    }
+    private void handleLetoltes(ActionEvent event) {loadView("/nje/ea/eabeadando/nbadownload-view.fxml");}
 
     @FXML
     private void handleLetoltes2(ActionEvent event) {

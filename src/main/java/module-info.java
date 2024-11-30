@@ -11,6 +11,7 @@ module nje.ea.eabeadando {
 
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires java.desktop;
 
     opens nje.ea.eabeadando to javafx.fxml;
     exports nje.ea.eabeadando;
