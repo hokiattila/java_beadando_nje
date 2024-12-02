@@ -5,7 +5,7 @@
 - **Koltai Armand** (GYBASN)
 
 ### Teszteléshez
-A `Letöltések.zip` mappa kicsomagolását követően az `adatok.db` állományt a `c:\adatok` mappában kell elhelyezni.
+A `LETOLTES.zip` mappa kicsomagolását követően az `adatok.db` állományt a `c:\adatok` mappában kell elhelyezni.
 
 ### A Letöltések.zip archívum
 Elérhető a projekt gyökérkönyvtárában vagy a "Releases" menüpontból is letölthető.
