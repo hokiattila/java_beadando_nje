@@ -40,7 +40,12 @@ public class MNB {
             }
 
             // ProcessBuilder a másik JAR futtatására
-            ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", tempJarFile.getAbsolutePath(), currency, startDate, endDate);
+            ProcessBuilder processBuilder = new ProcessBuilder(
+                    "java",
+                    "--add-opens", "java.base/java.lang=ALL-UNNAMED", // Hozzáadja a szükséges JVM paramétert
+                    "-jar", tempJarFile.getAbsolutePath(),
+                    currency, startDate, endDate
+            );
 
             // Parancs futtatása
             Process process = processBuilder.start();

@@ -9,11 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
@@ -25,14 +24,6 @@
             <artifactId>webservices-rt</artifactId>
             <version>2.3.1</version>
         </dependency>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c99da4 (Added first iteration of MNB SOAP Service)
-=======
-
->>>>>>> 1f40417 (Adjusted ordering in MNB API)
     </dependencies>
     <build>
         <plugins>
